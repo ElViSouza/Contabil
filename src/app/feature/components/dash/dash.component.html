@@ -1,0 +1,29 @@
+<div>
+  <label for="category">Category:{{ category }}</label>
+  <input type="text" id="category" [(ngModel)]="category" />
+</div>
+
+<div>
+  <label for="productName">Product Name:</label>
+  <input type="text" id="productName" [(ngModel)]="productName" />
+</div>
+
+<div>
+  <label for="price">Price:</label>
+  <input type="number" id="price" [(ngModel)]="price" />
+</div>
+<div>
+  <label for="price">Price:</label>
+  <input type="number" id="meta" [(ngModel)]="meta" />
+</div>
+<button (click)="addNewProduct()">Add Product</button>
+<h2>Produtos:</h2>
+<div *ngFor="let category of products | keyvalue">
+  <ng-container *ngFor="let product of products; let key = index">
+    <p><strong>Categorias:</strong> {{ product.key }}</p>
+  </ng-container>
+  <div *ngFor="let product of category.value | keyvalue">
+    <p><strong>Nome do Produto:</strong> {{ product.value.productName }}</p>
+    <p><strong>Preço:</strong> {{ product.value.price }}</p>
+  </div>
+</div>

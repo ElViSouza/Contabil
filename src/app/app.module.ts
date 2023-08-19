@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterUserComponent } from './feature/register-user/register-user.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './feature/dashboard/dashboard.component';
+import { DashComponent } from './feature/components/dash/dash.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DashboardComponent } from './feature/dashboard/dashboard.component';
     HomeComponent,
     SigninComponent,
     RegisterUserComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashComponent
   ],
   imports: [
     BrowserModule,

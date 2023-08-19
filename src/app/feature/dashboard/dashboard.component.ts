@@ -1,4 +1,5 @@
 import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
 
 @Component({
@@ -9,6 +10,11 @@ import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.servi
 export class DashboardComponent {
   constructor(
     public authService: FirebaseAuthService,
-  ) {}
+    private router: Router,
+  ) { }
+
+  next() {
+    this.router.navigate(['/inicio']);
+  }
 }
 

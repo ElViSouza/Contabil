@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from '../interface/user';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,12 @@ import { User } from '../interface/user';
 export class FirebaseAuthService {
   userData: any;
 
-  constructor(private afAuth: AngularFireAuth, public router: Router, public afs: AngularFirestore,) {
+  constructor(
+    private afAuth: AngularFireAuth,
+     public router: Router,
+      public afs: AngularFirestore,
+      private db: AngularFireDatabase,
+      ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -60,5 +67,38 @@ export class FirebaseAuthService {
     return userRef.set(userData, {
       merge: true,
     });
+  }
+  addProduct(category: string, productName: string, price: number) {
+    const productsRef = this.db.list(`products/${category}`);
+    
+    const newProduct = {
+      productName: productName,
+      price: price
+    };
+  
+    return productsRef.push(newProduct);
+  }
+  addProductToDatabase(category: string, productName: string, price: number, meta: number) {
+    const productsRef = this.db.list(`products/${category}`);
+  
+    const newProduct = {
+      productName: productName,
+      price: price,
+      meta: meta,
+    };
+
+    return productsRef.push(newProduct);
+  }
+  fetchProductsFromFirebase(): Observable<any[]> {
+    const productsRef = this.db.list('products');
+    return productsRef.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const data = action.payload.val() as any; // Correção aqui
+          const key = action.key || ''; // Certifique-se de ter um valor padrão
+          return { key, ...data };
+        });
+      })
+    );
   }
 }
