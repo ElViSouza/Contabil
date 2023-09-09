@@ -5,7 +5,7 @@ import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.servi
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
   constructor(

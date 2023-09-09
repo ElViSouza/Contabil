@@ -68,29 +68,74 @@ export class FirebaseAuthService {
       merge: true,
     });
   }
-  addProduct(category: string, productName: string, price: number) {
+  addProduct(category: string, price: number) {
     const productsRef = this.db.list(`products/${category}`);
     
     const newProduct = {
-      productName: productName,
       price: price
     };
   
     return productsRef.push(newProduct);
   }
-  addProductToDatabase(category: string, productName: string, price: number, meta: number) {
+  addProduct2(category2: string, productName2: string, price2: number) {
+    const productsRef = this.db.list(`products2/${category2}`);
+    
+    const newProduct = {
+      productName2: productName2,
+      price2: price2
+    };
+  
+    return productsRef.push(newProduct);
+  }
+  addProductToDatabase(category: string,  price: number, meta: number) {
     const productsRef = this.db.list(`products/${category}`);
   
     const newProduct = {
-      productName: productName,
       price: price,
       meta: meta,
     };
 
     return productsRef.push(newProduct);
   }
+  addProductToDatabase2(category2: string, price2: number, meta2: number, callback: Function) {
+    // Crie um objeto com os dados que você deseja adicionar
+    const productData = {
+        category: category2,
+        price: price2,
+        meta: meta2
+    };
+
+    // Referência para o nó "products2" no banco de dados
+    const productsRef = this.db.database.ref("products2");
+
+    // Use a função set para adicionar os dados ao banco de dados com base na categoria
+    productsRef.child(category2).set(productData)
+      .then(() => {
+        // Chame o callback de sucesso
+        callback(null);
+      })
+      .catch(error => {
+        // Chame o callback de erro com o erro recebido
+        callback(error);
+      });
+}
+
+
+  
   fetchProductsFromFirebase(): Observable<any[]> {
     const productsRef = this.db.list('products');
+    return productsRef.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const data = action.payload.val() as any; // Correção aqui
+          const key = action.key || ''; // Certifique-se de ter um valor padrão
+          return { key, ...data };
+        });
+      })
+    );
+  }
+  fetchProductsFromFirebase2(): Observable<any[]> {
+    const productsRef = this.db.list('products2');
     return productsRef.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {

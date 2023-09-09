@@ -1,29 +1,58 @@
-<div>
-  <label for="category">Category:{{ category }}</label>
-  <input type="text" id="category" [(ngModel)]="category" />
-</div>
-
-<div>
-  <label for="productName">Product Name:</label>
-  <input type="text" id="productName" [(ngModel)]="productName" />
-</div>
-
-<div>
-  <label for="price">Price:</label>
-  <input type="number" id="price" [(ngModel)]="price" />
-</div>
-<div>
-  <label for="price">Price:</label>
-  <input type="number" id="meta" [(ngModel)]="meta" />
-</div>
-<button (click)="addNewProduct()">Add Product</button>
-<h2>Produtos:</h2>
-<div *ngFor="let category of products | keyvalue">
-  <ng-container *ngFor="let product of products; let key = index">
-    <p><strong>Categorias:</strong> {{ product.key }}</p>
-  </ng-container>
-  <div *ngFor="let product of category.value | keyvalue">
-    <p><strong>Nome do Produto:</strong> {{ product.value.productName }}</p>
-    <p><strong>Preço:</strong> {{ product.value.price }}</p>
+<section class="Container">
+  <div>
+    <label for="category">Nome:{{ category }}</label>
+    <input type="text" id="category" [(ngModel)]="category" />
   </div>
-</div>
+
+  <div>
+    <label for="price">Esperado:</label>
+    <input type="number" id="price" [(ngModel)]="price" />
+  </div>
+  <div>
+    <label for="price">Recebido:</label>
+    <input type="number" id="meta" [(ngModel)]="meta" />
+  </div>
+</section>
+<button mat-raised-button (click)="addNewProduct()">Adicionar renda</button>
+<section class="Container">
+
+   <div>
+    <label for="category">Nome:{{ category2 }}</label>
+    <input type="text" id="category" [(ngModel)]="category2" />
+  </div>
+  <div>
+    <label for="price">Esperado:</label>
+    <input type="number" id="price" [(ngModel)]="price2" />
+  </div>
+  <div>
+    <label for="price">Recebido:</label>
+    <input type="number" id="meta" [(ngModel)]="meta2" />
+  </div>
+</section>
+  <button mat-raised-button (click)="addNewProduct2()">Adicionar Gastos</button>
+  <table mat-table [dataSource]="productsArray" class="mat-elevation-z8">
+
+    <!-- Categoria Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Despesas</th>
+      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+    </ng-container>
+  
+    <!-- Preço Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Preço</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+  
+    <!-- Meta Column -->
+    <ng-container matColumnDef="meta">
+      <th mat-header-cell *matHeaderCellDef>Meta</th>
+      <td mat-cell *matCellDef="let element">{{ element.meta }}</td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+    
+  <!-- </div> -->

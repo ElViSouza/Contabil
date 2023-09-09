@@ -18,6 +18,11 @@ import { RegisterUserComponent } from './feature/register-user/register-user.com
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './feature/dashboard/dashboard.component';
 import { DashComponent } from './feature/components/dash/dash.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +46,11 @@ import { DashComponent } from './feature/components/dash/dash.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ToastrModule.forRoot(),
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatTableModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
