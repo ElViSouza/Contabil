@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -22,8 +22,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
+import { TopHeaderComponent } from './feature/components/headers/top-header/top-header.component';
+import { ExpensesComponent } from './feature/components/expenses/expenses.component';
+import { FooterHeaderComponent } from './feature/components/headers/footer-header/footer-header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconDefaultOptions, MatIconModule } from '@angular/material/icon';
+import {MatIconTestingModule} from '@angular/material/icon/testing';
 
-
+// const MAT_ICON_DEFAULT_OPTIONS: InjectionToken<MatIconDefaultOptions>;
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +38,10 @@ import {MatTableModule} from '@angular/material/table';
     SigninComponent,
     RegisterUserComponent,
     DashboardComponent,
-    DashComponent
+    DashComponent,
+    TopHeaderComponent,
+    FooterHeaderComponent,
+    ExpensesComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +59,12 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatIconTestingModule
 
   ],
   providers: [],

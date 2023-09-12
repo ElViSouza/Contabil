@@ -1,0 +1,78 @@
+/* styles.css ou styles.scss */
+.custom-padding {
+    padding: 1.5rem;
+  }
+  
+  section {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    /* display: flex; */
+  }
+  
+  /* Estilos para os rótulos (labels) e campos de entrada (inputs) */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px; /* Tamanho do texto do rótulo */
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #007bff; /* Cor da borda (azul) */
+    border-radius: 4px;
+    font-size: 16px; /* Tamanho do texto do campo de entrada */
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    outline: none;
+    border: 2px solid #007bff; /* Cor da borda quando em foco (azul) */
+  }
+  
+  /* Estilos para o botão */
+  button {
+    display: block;
+    margin: 20px auto; /* Centraliza o botão horizontalmente */
+    padding: 10px 20px;
+    background-color: #007bff; /* Cor de fundo do botão (azul) */
+    color: #fff; /* Cor do texto do botão (branco) */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px; /* Tamanho do texto do botão */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efeito de transição suave */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse (tom mais escuro de azul) */
+  }
+  
+  .income-form {
+    /* max-width: 320px; */
+    display: block;
+  }
+  
+  .input-group {
+    display: block;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .input-group > div {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  /* Consulta de mídia para dispositivos com largura superior a 768px (desktop) */
+  @media (min-width: 769px) {
+    .input-group {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  
+    .input-group > div {
+      margin-right: 10px;
+    }
+  }

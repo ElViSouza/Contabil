@@ -87,15 +87,25 @@ export class FirebaseAuthService {
   
     return productsRef.push(newProduct);
   }
-  addProductToDatabase(category: string,  price: number, meta: number) {
-    const productsRef = this.db.list(`products/${category}`);
+  addProductToDatabase(category: string,  price: number, meta: number, callback: Function) {
+    // const productsRef = this.db.list(`products/${category}`);
   
     const newProduct = {
       price: price,
       meta: meta,
     };
+    const productsRef = this.db.database.ref("products");
 
-    return productsRef.push(newProduct);
+
+    productsRef.child(category).set(newProduct)
+      .then(() => {
+        // Chame o callback de sucesso
+        callback(null);
+      })
+      .catch(error => {
+        // Chame o callback de erro com o erro recebido
+        callback(error);
+      });
   }
   addProductToDatabase2(category2: string, price2: number, meta2: number, callback: Function) {
     // Crie um objeto com os dados que você deseja adicionar
