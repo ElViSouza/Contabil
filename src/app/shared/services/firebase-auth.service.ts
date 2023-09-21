@@ -87,16 +87,11 @@ export class FirebaseAuthService {
   
     return productsRef.push(newProduct);
   }
-  addProductToDatabase(category: string,  price: number, meta: number, callback: Function) {
-    // const productsRef = this.db.list(`products/${category}`);
-  
+  addProductToDatabase(category: string,  price: number, callback: Function) {
     const newProduct = {
       price: price,
-      meta: meta,
     };
     const productsRef = this.db.database.ref("products");
-
-
     productsRef.child(category).set(newProduct)
       .then(() => {
         // Chame o callback de sucesso
@@ -107,18 +102,28 @@ export class FirebaseAuthService {
         callback(error);
       });
   }
-  addProductToDatabase2(category2: string, price2: number, meta2: number, callback: Function) {
-    // Crie um objeto com os dados que você deseja adicionar
+  deleteProductFromDatabase(category: string, callback: Function) {
+    const productsRef = this.db.database.ref("products");
+    productsRef.child(category).remove()
+      .then(() => {
+        // Chame o callback de sucesso
+        callback(null);
+      })
+      .catch(error => {
+        // Chame o callback de erro com o erro recebido
+        callback(error);
+      });
+  }
+  
+  
+
+  addProductToDatabase2(category2: string, price2: number, selectedCategory: string, callback: Function) {
     const productData = {
-        category: category2,
         price: price2,
-        meta: meta2
+        selectedCategory:selectedCategory
     };
 
-    // Referência para o nó "products2" no banco de dados
     const productsRef = this.db.database.ref("products2");
-
-    // Use a função set para adicionar os dados ao banco de dados com base na categoria
     productsRef.child(category2).set(productData)
       .then(() => {
         // Chame o callback de sucesso
@@ -128,6 +133,18 @@ export class FirebaseAuthService {
         // Chame o callback de erro com o erro recebido
         callback(error);
       });
+}
+deleteProductFromDatabase2(category2: string, callback: Function) {
+  const productsRef = this.db.database.ref("products2");
+  productsRef.child(category2).remove()
+    .then(() => {
+      // Chame o callback de sucesso
+      callback(null);
+    })
+    .catch(error => {
+      // Chame o callback de erro com o erro recebido
+      callback(error);
+    });
 }
 
 

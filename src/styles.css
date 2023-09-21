@@ -16,6 +16,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: "Poppins", sans-serif;
+  /* background-color:  #243b55; */
 }
 
 .feather {
@@ -708,4 +709,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+.top{
+  padding-bottom: 70px !important;
 }

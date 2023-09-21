@@ -75,4 +75,14 @@
     .input-group > div {
       margin-right: 10px;
     }
+  }.icon {
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
   }
+  
+  .icon:hover {
+    color: #ffcc00; /* Cor de destaque ao passar o mouse */
+  }
+  

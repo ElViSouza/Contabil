@@ -1,0 +1,25 @@
+<div>
+  <label for="categoryFilter">Filtrar por Categoria:</label>
+  <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="updateFilteredProducts()">
+    <option value="">Todas as Categorias</option>
+    <option *ngFor="let category of categories" [value]="category">{{ categoryNames[category] }}</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Chave</th>
+      <th>Categoria</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of filteredProducts">
+      <td>{{ product?.key }}</td>
+      <td>{{ categoryNames[product.selectedCategory] }}</td>
+      <td>{{ product.price }}</td>
+    </tr>
+  </tbody>
+</table>
+<app-footer-header></app-footer-header>

@@ -16,5 +16,10 @@ export class DashboardComponent {
   next() {
     this.router.navigate(['/inicio']);
   }
+  getFirstNameFromEmail(email: string): string {
+    // Divida o email usando o "@" como separador e pegue a primeira parte
+    const emailParts = email.split('@');
+    return emailParts[0];
+  }
 }
 
