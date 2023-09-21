@@ -1,16 +1,8 @@
 
-<!-- Top navigation -->
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0">
-        <img class="brand-logo" src="assets/logo.png" alt="positronX.io Logo">
-    </a>
-</nav>
-
-<!-- Sidebar navigation -->
-<div class="container-fluid">
+<div class="container-fluid top">
     <div class="row">
 
-        <nav class="col-md-2 d-md-block bg-light sidebar">
+        <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -22,12 +14,24 @@
                     <li class="nav-item">
                         <a class="nav-link" (click)="authService.SignOut()">
                             <i class="fas fa-sign-out-alt"></i>
+                            <i class="fas fa-euro-sign"></i>
+                            <i class="fas fa-dollar-sign"></i>
+                            <i class="fas fa-coins"></i>
+                            <i class="fas fa-wallet"></i>
+                            <i class="fas fa-cash-register"></i>
+
                             Log out
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="next()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            entrar
                         </a>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="inner-adjust">
 
@@ -49,6 +53,8 @@
                             </div>
                         </div>
                     </div>
+                    <h1>Hello: <strong>{{(user.displayName) ? user.displayName : getFirstNameFromEmail(user.email)}}</strong></h1>
+
                 </div>
             </div>
         </main>

@@ -1,22 +1,26 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="mb-3">Login</h2>
-            <form (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" class="form-control" [(ngModel)]="email" required
-                        [ngModelOptions]="{standalone: true}">
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" class="form-control" [(ngModel)]="password" required
-                        [ngModelOptions]="{standalone: true}">
-                </div><br><br>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <br><br>
-                <button (click)="isRegister()" class="btn btn-link">Registro</button>
-            </form>
-        </div>
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="user-box">
+                <input type="email" name="" required id="email" [(ngModel)]="email"
+                    [ngModelOptions]="{standalone: true}" placeholder="Email">
+                <!-- <label>Username</label> -->
+            </div>
+            <div class="user-box">
+                <input type="password" name="" required id="password" [(ngModel)]="password"
+                    [ngModelOptions]="{standalone: true}" placeholder="Password">
+                <!-- <label>Password</label> -->
+            </div>
+            <button type="submit">
+                <a>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Submit
+                </a>
+            </button>
+        </form>
     </div>
-</div>
+</body>

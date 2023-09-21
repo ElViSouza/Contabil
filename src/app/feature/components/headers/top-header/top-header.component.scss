@@ -1,0 +1,102 @@
+/* Estilos para o cabeçalho */
+header {
+    // background-color: ;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    height: 90px;
+    margin-top: 10px;
+}
+
+/* Estilos para as bolinhas */
+.balls-container {
+    display: flex;
+    justify-content: space-evenly;
+    animation: moveBalls 30s linear infinite; /* Ajuste a duração aqui para tornar mais lento */
+}
+
+.ball {
+    width: 30px;
+    height: 30px;
+    background-color: #FF5733; /* Cor da bolinha */
+    border-radius: 50%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px; /* Tamanho do símbolo de dólar */
+    color: #fff; /* Cor do símbolo de dólar */
+    animation: bounce 3s ease-in-out infinite; /* Ajuste a duração aqui para tornar mais lento */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Ajuste a altura do salto aqui */
+    }
+}
+
+@keyframes moveBalls {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+/* Estilos para o cabeçalho */
+// header {
+//     background-color: #333;
+//     color: #fff;
+//     padding: 10px;
+//     position: relative;
+//     overflow: hidden;
+// }
+
+/* Estilos para as notas de dólar */
+.dollar-notes-container {
+    display: flex;
+    justify-content: space-evenly;
+    animation: moveDollarNotes 30s linear infinite; /* Ajuste a duração aqui para tornar mais lento */
+}
+
+.dollar-note {
+    width: 50px;
+    height: 25px;
+    background-color: #009900; /* Cor da nota de dólar */
+    border-radius: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px; /* Tamanho do cifrão */
+    color: #fff; /* Cor do cifrão */
+    animation: floatDollar 3s ease-in-out infinite; /* Ajuste a duração aqui para tornar mais lento */
+}
+
+@keyframes floatDollar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Ajuste a altura da flutuação aqui */
+    }
+}
+
+@keyframes moveDollarNotes {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
