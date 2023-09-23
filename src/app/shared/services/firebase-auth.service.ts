@@ -87,12 +87,12 @@ export class FirebaseAuthService {
   
     return productsRef.push(newProduct);
   }
-  addProductToDatabase(category: string,  price: number, callback: Function) {
+  addProductToDatabase(year: string, month: string, category: string, price: number, callback: Function) {
     const newProduct = {
       price: price,
     };
     const productsRef = this.db.database.ref("products");
-    productsRef.child(category).set(newProduct)
+    productsRef.child(year).child(month).child(category).set(newProduct)
       .then(() => {
         // Chame o callback de sucesso
         callback(null);
@@ -102,6 +102,7 @@ export class FirebaseAuthService {
         callback(error);
       });
   }
+  
   deleteProductFromDatabase(category: string, callback: Function) {
     const productsRef = this.db.database.ref("products");
     productsRef.child(category).remove()
@@ -149,18 +150,19 @@ deleteProductFromDatabase2(category2: string, callback: Function) {
 
 
   
-  fetchProductsFromFirebase(): Observable<any[]> {
-    const productsRef = this.db.list('products');
-    return productsRef.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(action => {
-          const data = action.payload.val() as any; // Correção aqui
-          const key = action.key || ''; // Certifique-se de ter um valor padrão
-          return { key, ...data };
-        });
-      })
-    );
-  }
+fetchProductsFromFirebase(year: string, month: string): Observable<any[]> {
+  const productsRef = this.db.list(`products/${year}/${month}`);
+  return productsRef.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(action => {
+        const data = action.payload.val() as any; // Correção aqui
+        const key = action.key || ''; // Certifique-se de ter um valor padrão
+        return { key, ...data };
+      });
+    })
+  );
+}
+
   fetchProductsFromFirebase2(): Observable<any[]> {
     const productsRef = this.db.list('products2');
     return productsRef.snapshotChanges().pipe(

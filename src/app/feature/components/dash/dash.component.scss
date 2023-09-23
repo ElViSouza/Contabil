@@ -1,56 +1,47 @@
 /* styles.css ou styles.scss */
-.custom-padding {
-  padding: 1.5rem;
-}
-
-section {
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  /* display: flex; */
-}
-
 /* Estilos para os rótulos (labels) e campos de entrada (inputs) */
 label {
   display: block;
   margin-bottom: 5px;
-  font-size: 16px; /* Tamanho do texto do rótulo */
+  font-size: 16px;
 }
 
 input[type="text"],
 input[type="number"] {
   width: 100%;
+  max-width: 400px;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #007bff; /* Cor da borda (azul) */
+  border: 1px solid #007bff;
   border-radius: 4px;
-  font-size: 16px; /* Tamanho do texto do campo de entrada */
+  font-size: 16px;
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus {
   outline: none;
-  border: 2px solid #007bff; /* Cor da borda quando em foco (azul) */
+  border: 2px solid #007bff;
 }
 
 /* Estilos para o botão */
 button {
   display: block;
-  margin: 20px auto; /* Centraliza o botão horizontalmente */
+  margin: 20px auto;
   padding: 10px 20px;
-  background-color: #007bff; /* Cor de fundo do botão (azul) */
-  color: #fff; /* Cor do texto do botão (branco) */
+  background-color: #007bff;
+  color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 16px; /* Tamanho do texto do botão */
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Efeito de transição suave */
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse (tom mais escuro de azul) */
+  background-color: #0056b3;
 }
 
 .income-form {
-  /* max-width: 320px; */
   display: block;
 }
 
@@ -60,9 +51,10 @@ button:hover {
   flex-wrap: wrap;
 }
 
-.input-group > div {
+.input-group>div {
   flex: 1;
   margin-right: 10px;
+  padding: 20px;
 }
 
 /* Consulta de mídia para dispositivos com largura superior a 768px (desktop) */
@@ -72,17 +64,39 @@ button:hover {
     flex-wrap: nowrap;
   }
 
-  .input-group > div {
+  .input-group>div {
     margin-right: 10px;
   }
 }
-.icon {
-  color: red;
-  font-size: 24px;
-  cursor: pointer;
-  transition: color 0.3s ease;
+
+.Group {
+  display: flex;
+  width: 100%;
+
+  &_aling {
+    width: 100%;
+    justify-content: space-evenly;
+    display: flex;
+
+    span {
+      cursor: pointer;
+    }
+  }
 }
 
-.icon:hover {
-  color: #ffcc00; /* Cor de destaque ao passar o mouse */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(141, 18, 18);
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.Comp {
+  padding: 1.5rem;
+  display: block;
+  justify-content: center;
 }

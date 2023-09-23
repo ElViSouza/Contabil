@@ -1,44 +1,12 @@
 
 <div class="container-fluid top">
     <div class="row">
-
-        <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active">
-                            <i class="fas fa-user"></i>
-                            User Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="authService.SignOut()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <i class="fas fa-euro-sign"></i>
-                            <i class="fas fa-dollar-sign"></i>
-                            <i class="fas fa-coins"></i>
-                            <i class="fas fa-wallet"></i>
-                            <i class="fas fa-cash-register"></i>
-
-                            Log out
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="next()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            entrar
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav> -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="inner-adjust">
 
                 <div class="pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">User Profile</h1>
                 </div>
-                <!-- Show user data when logged in -->
                 <div class="row" *ngIf="authService.userData as user">
                     <div class="col-md-12">
                         <div class="media">
@@ -54,9 +22,9 @@
                         </div>
                     </div>
                     <h1>Hello: <strong>{{(user.displayName) ? user.displayName : getFirstNameFromEmail(user.email)}}</strong></h1>
-
                 </div>
             </div>
         </main>
     </div>
 </div>
+<app-footer-header></app-footer-header>
