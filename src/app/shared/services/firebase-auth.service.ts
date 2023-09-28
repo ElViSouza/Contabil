@@ -118,14 +118,14 @@ export class FirebaseAuthService {
   
   
 
-  addProductToDatabase2(category2: string, price2: number, selectedCategory: string, callback: Function) {
+  addProductToDatabase2(year: string, month: string, category2: string, price2: number, selectedCategory: string, callback: Function) {
     const productData = {
         price: price2,
-        selectedCategory:selectedCategory
+        selectedCategory: selectedCategory,
     };
 
     const productsRef = this.db.database.ref("products2");
-    productsRef.child(category2).set(productData)
+    productsRef.child(year).child(month).child(category2).set(productData)
       .then(() => {
         // Chame o callback de sucesso
         callback(null);
@@ -135,6 +135,7 @@ export class FirebaseAuthService {
         callback(error);
       });
 }
+
 deleteProductFromDatabase2(category2: string, callback: Function) {
   const productsRef = this.db.database.ref("products2");
   productsRef.child(category2).remove()

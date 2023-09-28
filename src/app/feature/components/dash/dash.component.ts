@@ -19,15 +19,14 @@ export class DashComponent implements OnInit {
   category2: string = '';
   productName2: string = '';
   // selectedMonth: any;
-  selectedYear: string;
   isModalVisible: boolean = false;
-  price2: number = 0;
   productAdded: boolean = true;
   products: any[] = [];
   products2: any[] = [];
   categories: any[] = [];
   value = 'Clear me';
   displayedColumns: string[] = ['category', 'price', 'actions'];
+  selectedYear: string;
   meses: string[] = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"

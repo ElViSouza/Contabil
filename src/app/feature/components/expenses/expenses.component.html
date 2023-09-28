@@ -1,61 +1,37 @@
 <section class="Container top">
-  <form class="income-form" (ngSubmit)="addNewProduct2()" [formGroup]="formGroup">
+  <div class="Group">
+    <div class="Group_aling">
+      <span (click)="selecionarMesAnterior()" class="material-icons">
+        arrow_back_ios
+      </span>
+      <span>{{ exibirDataResumida() }}</span>
+      <span (click)="selecionarProximoMes()" class="material-icons">
+        arrow_forward_ios
+      </span>
+    </div>
+  </div>
+  <div class="income-form">
     <div>
       <h3>Informe suas Despesas</h3>
     </div>
     <div class="input-group">
       <div>
-        <label for="category">Nome:</label>
-        <input type="text" id="category" formControlName="category" />
+        <label for="category2">Nome:</label>
+        <input type="text" id="category2" [(ngModel)]="category2" />
       </div>
-  
+
       <div>
-        <label for="price">Esperado:</label>
-        <input type="number" id="price" formControlName="price" />
+        <label for="price2">Esperado:</label>
+        <input type="number" id="price2" [(ngModel)]="price2" />
       </div>
       <div>
-        <select formControlName="selectedCategory">
+        <select [(ngModel)]="selectedCategory">
           <option *ngFor="let cat of categoriess" [value]="cat">{{ cat }}</option>
         </select>
       </div>
     </div>
-  
-    <button mat-raised-button type="submit" [disabled]="formGroup.invalid">Adicionar Gastos</button>
-  </form>
 
-
-<div *ngIf="selectedCategory">
-  <p>Categoria selecionada: {{ selectedCategory }}</p>
-</div>
-<table mat-table [dataSource]="productsArray" class="mat-elevation-z8">
-
-  <!-- <ng-container matColumnDef="selectedCategory">
-    <th mat-header-cell *matHeaderCellDef>Tipo</th>
-    <td mat-cell *matCellDef="let element">{{ element.selectedCategory }}</td>
-  </ng-container>
-   -->
-  <!-- Categoria Column -->
-  <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef>Despesas</th>
-    <td mat-cell *matCellDef="let element">{{ element.category }}</td>
-  </ng-container>
-
-  <!-- Preço Column -->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef>Preço</th>
-    <td mat-cell *matCellDef="let element">{{ element.price | currency: 'BRL' }}</td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Ações</th>
-    <td mat-cell *matCellDef="let element">
-      <i (click)="deleteProduct2(element.category)" class="fa-solid fa-trash icon"></i>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <button mat-raised-button (click)="addNewProduct2()">Adicionar Gastos</button>
+  </div>
 </section>
 <app-footer-header></app-footer-header>

@@ -85,4 +85,17 @@
   .icon:hover {
     color: #ffcc00; /* Cor de destaque ao passar o mouse */
   }
+  .Group {
+    display: flex;
+    width: 100%;
   
+    &_aling {
+      width: 100%;
+      justify-content: space-evenly;
+      display: flex;
+  
+      span {
+        cursor: pointer;
+      }
+    }
+  }
