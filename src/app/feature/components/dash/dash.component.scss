@@ -9,12 +9,14 @@ label {
 input[type="text"],
 input[type="number"] {
   width: 100%;
-  max-width: 400px;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #007bff;
+  margin-top: 10px;
   border-radius: 4px;
   font-size: 16px;
+  font-family: 'Inclusive Sans', sans-serif;
+
 }
 
 input[type="text"]:focus,
@@ -27,18 +29,18 @@ input[type="number"]:focus {
 button {
   display: block;
   margin: 20px auto;
-  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
   font-size: 16px;
+  font-family: 'Inclusive Sans', sans-serif;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #5790ce;
 }
 
 .income-form {
@@ -49,12 +51,13 @@ button:hover {
   display: block;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .input-group>div {
   flex: 1;
-  margin-right: 10px;
-  padding: 20px;
+  display: flex;
+
 }
 
 /* Consulta de mídia para dispositivos com largura superior a 768px (desktop) */
@@ -69,6 +72,14 @@ button:hover {
   }
 }
 
+.Texto {
+  font-family: 'Inclusive Sans', sans-serif;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  margin-top: 1rem;
+}
 .Group {
   display: flex;
   width: 100%;
@@ -77,6 +88,7 @@ button:hover {
     width: 100%;
     justify-content: space-evenly;
     display: flex;
+    font-size: 20px;
 
     span {
       cursor: pointer;

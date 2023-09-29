@@ -4,7 +4,7 @@
       <span (click)="selecionarMesAnterior()" class="material-icons">
         arrow_back_ios
       </span>
-      <span>{{ exibirDataResumida() }}</span>
+      <span class="text">{{ exibirDataResumida() }}</span>
       <span (click)="selecionarProximoMes()" class="material-icons">
         arrow_forward_ios
       </span>
@@ -13,16 +13,14 @@
   <div>
     <div class="income-form">
       <div class="center">
-        <h4>Receitas</h4>
+        <span class="Texto">Receitas</span>
       </div>
       <div class="input-group">
         <div>
-          <label for="category">Ex: Salário, Vale, VR..</label>
           <input type="text" id="category" [(ngModel)]="category" placeholder="Exemplo: Salário" />
         </div>
 
         <div>
-          <label for="price">O esperado que entre</label>
           <input type="number" id="price" [(ngModel)]="price" placeholder="Exemplo: R$ 1.000,00" />
         </div>
       </div>

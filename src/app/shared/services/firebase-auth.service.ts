@@ -14,10 +14,10 @@ export class FirebaseAuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-     public router: Router,
-      public afs: AngularFirestore,
-      private db: AngularFireDatabase,
-      ) {
+    public router: Router,
+    public afs: AngularFirestore,
+    private db: AngularFireDatabase,
+  ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -70,21 +70,21 @@ export class FirebaseAuthService {
   }
   addProduct(category: string, price: number) {
     const productsRef = this.db.list(`products/${category}`);
-    
+
     const newProduct = {
       price: price
     };
-  
+
     return productsRef.push(newProduct);
   }
   addProduct2(category2: string, productName2: string, price2: number) {
     const productsRef = this.db.list(`products2/${category2}`);
-    
+
     const newProduct = {
       productName2: productName2,
       price2: price2
     };
-  
+
     return productsRef.push(newProduct);
   }
   addProductToDatabase(year: string, month: string, category: string, price: number, callback: Function) {
@@ -102,7 +102,11 @@ export class FirebaseAuthService {
         callback(error);
       });
   }
-  
+  getProductsFromFirebase(year: string, month: string, category: string): Observable<any[]> {
+    const productsRef = this.db.list(`products/${year}/${month}/${category}`);
+    return productsRef.valueChanges(); // Retorna um Observable com os valores dos produtos
+  }
+
   deleteProductFromDatabase(category: string, callback: Function) {
     const productsRef = this.db.database.ref("products");
     productsRef.child(category).remove()
@@ -115,13 +119,13 @@ export class FirebaseAuthService {
         callback(error);
       });
   }
-  
-  
+
+
 
   addProductToDatabase2(year: string, month: string, category2: string, price2: number, selectedCategory: string, callback: Function) {
     const productData = {
-        price: price2,
-        selectedCategory: selectedCategory,
+      price: price2,
+      selectedCategory: selectedCategory,
     };
 
     const productsRef = this.db.database.ref("products2");
@@ -134,43 +138,43 @@ export class FirebaseAuthService {
         // Chame o callback de erro com o erro recebido
         callback(error);
       });
-}
+  }
 
-deleteProductFromDatabase2(category2: string, callback: Function) {
-  const productsRef = this.db.database.ref("products2");
-  productsRef.child(category2).remove()
-    .then(() => {
-      // Chame o callback de sucesso
-      callback(null);
-    })
-    .catch(error => {
-      // Chame o callback de erro com o erro recebido
-      callback(error);
-    });
-}
-
-
-  
-fetchProductsFromFirebase(year: string, month: string): Observable<any[]> {
-  const productsRef = this.db.list(`products/${year}/${month}`);
-  return productsRef.snapshotChanges().pipe(
-    map(actions => {
-      return actions.map(action => {
-        const data = action.payload.val() as any; // Correção aqui
-        const key = action.key || ''; // Certifique-se de ter um valor padrão
-        return { key, ...data };
+  deleteProductFromDatabase2(category2: string, callback: Function) {
+    const productsRef = this.db.database.ref("products2");
+    productsRef.child(category2).remove()
+      .then(() => {
+        // Chame o callback de sucesso
+        callback(null);
+      })
+      .catch(error => {
+        // Chame o callback de erro com o erro recebido
+        callback(error);
       });
-    })
-  );
-}
+  }
+
+
+
+  fetchProductsFromFirebase(year: string, month: string): Observable<any[]> {
+    const productsRef = this.db.list(`products/${year}/${month}`);
+    return productsRef.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const data = action.payload.val() as any; // Correção aqui
+          const key = action.key || ''; // Certifique-se de ter um valor padrão
+          return { key, ...data };
+        });
+      })
+    );
+  }
 
   fetchProductsFromFirebase2(): Observable<any[]> {
     const productsRef = this.db.list('products2');
     return productsRef.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {
-          const data = action.payload.val() as any; // Correção aqui
-          const key = action.key || ''; // Certifique-se de ter um valor padrão
+          const data = action.payload.val() as any;
+          const key = action.key || '';
           return { key, ...data };
         });
       })

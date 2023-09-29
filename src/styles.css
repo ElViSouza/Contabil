@@ -718,3 +718,6 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: center;
   margin-top: 5px;
 }
+.text{
+  font-family: 'Inclusive Sans', sans-serif;
+}

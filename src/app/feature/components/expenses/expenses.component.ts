@@ -14,9 +14,7 @@ export interface ProductData {
 export class ExpensesComponent implements OnInit {
   category2: string;
   price2: number;
-  productAdded: boolean = true;
   products2: any[] = [];
-  displayedColumns: string[] = ['category2', 'price2', 'actions'];
   categoriess: string[] = ['casa', 'saúde', 'educação'];
   selectedCategory: string = '';
   productsArray: ProductData[] = [];
@@ -34,13 +32,8 @@ export class ExpensesComponent implements OnInit {
   ngOnInit() {
     this.fetchProductsFromFirebase2();
     this.selectedYear = new Date().getFullYear().toString();
-    const months = [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril',
-      'Maio', 'Junho', 'Julho', 'Agosto',
-      'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
     const now = new Date();
-    this.selectedMonth = months[now.getMonth()];
+    this.selectedMonth = this.meses[now.getMonth()];
     this.selectedYear = this.getYear();
   }
   getYear(): string {
@@ -82,7 +75,6 @@ export class ExpensesComponent implements OnInit {
 
 
   deleteProduct2(category2: string) {
-    // Chame o método do serviço para excluir um produto
     this.authService.deleteProductFromDatabase2(category2, (error) => {
       if (error) {
         console.error('Erro ao excluir produto:', error);
@@ -91,18 +83,11 @@ export class ExpensesComponent implements OnInit {
       }
     });
   }
-  // isObject(obj: any): boolean {
-  //   return typeof obj === 'object';
-  // }
-  // getObjectKeys(obj: any): string[] {
-  //   return Object.keys(obj);
-  // }
   selecionarMesAnterior() {
     const monthIndex = this.meses.indexOf(this.selectedMonth);
     if (monthIndex > 0) {
       this.selectedMonth = this.meses[monthIndex - 1];
     } else {
-      // Se for janeiro, retroceda para dezembro e atualize o ano
       this.selectedMonth = "Dezembro";
       this.selectedYear = (parseInt(this.selectedYear) - 1).toString();
     }
@@ -113,7 +98,6 @@ export class ExpensesComponent implements OnInit {
     if (monthIndex < this.meses.length - 1) {
       this.selectedMonth = this.meses[monthIndex + 1];
     } else {
-      // Se for dezembro, avance para janeiro e atualize o ano
       this.selectedMonth = "Janeiro";
       this.selectedYear = (parseInt(this.selectedYear) + 1).toString();
     }
@@ -121,10 +105,8 @@ export class ExpensesComponent implements OnInit {
 
   exibirDataResumida() {
     if (this.selectedYear === new Date().getFullYear().toString()) {
-      // Se o ano for o ano atual, exiba apenas o mês e o ano
       return `${this.selectedMonth}`;
     } else {
-      // Caso contrário, exiba a data resumida
       return `${this.selectedMonth.substr(0, 3)}. ${this.selectedYear}`;
     }
   }

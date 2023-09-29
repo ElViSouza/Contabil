@@ -1,11 +1,11 @@
-
+<!-- 
 <div class="container-fluid top">
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="inner-adjust">
 
                 <div class="pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">User Profile</h1>
+                    <h2 class="text">Bem vindo</h2>
                 </div>
                 <div class="row" *ngIf="authService.userData as user">
                     <div class="col-md-12">
@@ -26,5 +26,26 @@
             </div>
         </main>
     </div>
-</div>
+</div> -->
+<section>
+  <div class="Container">
+    <div class="Container_title">
+      <span class="text">Resumo</span>
+    </div>
+    <div class="Container_subtitle">
+      <span> Selecione o mês</span>
+    </div>
+    <div class="Group">
+      <div class="Group_aling">
+        <span (click)="selecionarMesAnterior()" class="material-icons">
+          arrow_back_ios
+        </span>
+        <span class="text">{{ exibirDataResumida() }}</span>
+        <span (click)="selecionarProximoMes()" class="material-icons">
+          arrow_forward_ios
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
 <app-footer-header></app-footer-header>

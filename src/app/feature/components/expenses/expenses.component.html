@@ -4,34 +4,32 @@
       <span (click)="selecionarMesAnterior()" class="material-icons">
         arrow_back_ios
       </span>
-      <span>{{ exibirDataResumida() }}</span>
+      <span class="text">{{ exibirDataResumida() }}</span>
       <span (click)="selecionarProximoMes()" class="material-icons">
         arrow_forward_ios
       </span>
     </div>
   </div>
   <div class="income-form">
-    <div>
-      <h3>Informe suas Despesas</h3>
+    <div class="Texto">
+      <span>Informe suas Despesas</span>
     </div>
     <div class="input-group">
       <div>
-        <label for="category2">Nome:</label>
-        <input type="text" id="category2" [(ngModel)]="category2" />
+        <input type="text" id="category2" placeholder="Nome:" [(ngModel)]="category2" />
       </div>
 
       <div>
-        <label for="price2">Esperado:</label>
-        <input type="number" id="price2" [(ngModel)]="price2" />
+        <input type="number" id="price2" placeholder="Valor:" [(ngModel)]="price2" />
       </div>
-      <div>
+      <div class="select">
         <select [(ngModel)]="selectedCategory">
+          <option value="" disabled selected>Buscar categoria</option>
           <option *ngFor="let cat of categoriess" [value]="cat">{{ cat }}</option>
         </select>
       </div>
     </div>
-
-    <button mat-raised-button (click)="addNewProduct2()">Adicionar Gastos</button>
+    <button mat-raised-button (click)="addNewProduct2()">Adicionar despesas</button>
   </div>
 </section>
 <app-footer-header></app-footer-header>
