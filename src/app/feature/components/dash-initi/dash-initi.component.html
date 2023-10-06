@@ -1,0 +1,41 @@
+<section>
+  <div class="Container">
+    <div>
+      <span class="Container_title">Resumo do Controle</span>
+    </div>
+    <div class="Container_value">
+      <div class="Container_value_dest">
+        <div>
+          <i class="fa-solid fa-cart-shopping icon"></i>
+          <span>
+            Receitas
+          </span>
+        </div>
+        <div class="Container_value_dest_cash">
+          <span>
+            {{ value | currency : 'BRL'}}
+          </span>
+        </div>
+      </div>
+      <div class="Container_value_dest">
+        <div>
+          <i class="fa-solid fa-cart-shopping icon"></i>
+          <span>
+            Despesas
+          </span>
+        </div>
+        <div class="Container_value_dest_cash">
+          <span>
+            {{ value | currency : 'BRL'}}
+          </span>
+        </div>
+        <div class="Container_value_dest_link" (click)="dashboard()">
+          <span>
+            ver detalhes
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer-header></app-footer-header>

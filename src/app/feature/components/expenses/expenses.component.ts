@@ -5,7 +5,19 @@ import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.servi
 export interface ProductData {
   category2: string;
   price2: number;
+  selectedCategory: string;
+  year: string;
+  month: string; // Adicione esta propriedade
 }
+
+export interface ExpenseData {
+  category2: string;
+  price2: number;
+  selectedCategory: string;
+  year: string;
+  month: string;
+}
+
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.component.html',
@@ -36,6 +48,11 @@ export class ExpensesComponent implements OnInit {
     this.selectedMonth = this.meses[now.getMonth()];
     this.selectedYear = this.getYear();
   }
+  // Adicione esta função à sua classe
+  filtrarDespesasPorMes() {
+    return this.productsArray.filter((product) => product.month === this.selectedMonth);
+  }
+
   getYear(): string {
     const currentDate = new Date();
     return currentDate.getFullYear().toString();
@@ -43,18 +60,34 @@ export class ExpensesComponent implements OnInit {
 
   fetchProductsFromFirebase2() {
     this.authService.fetchProductsFromFirebase2().subscribe((products2) => {
+      console.log('dd', products2);
       this.products2 = products2;
       this.productsArray = [];
-      for (const key in products2) {
-        if (products2.hasOwnProperty(key)) {
-          this.productsArray.push({
-            category2: products2[key].key,
-            price2: products2[key].price,
-          });
+
+      for (const year in products2) {
+        if (products2.hasOwnProperty(year)) {
+          for (const month in products2[year]) {
+            if (products2[year].hasOwnProperty(month)) {
+              for (const expenseKey in products2[year][month]) {
+                if (products2[year][month].hasOwnProperty(expenseKey)) {
+                  const expense: ProductData = {
+                    category2: expenseKey,
+                    price2: products2[year][month][expenseKey].price,
+                    selectedCategory: products2[year][month][expenseKey].selectedCategory,
+                    year: year,
+                    month: month
+                  };
+                  this.productsArray.push(expense);
+                }
+              }
+            }
+          }
         }
       }
     });
   }
+
+
   addNewProduct2() {
     if (this.category2 && this.price2 > 0 && this.selectedMonth && this.selectedYear && this.selectedCategory) {
       this.authService.addProductToDatabase2(this.selectedYear, this.selectedMonth, this.category2, this.price2, this.selectedCategory,
@@ -87,6 +120,8 @@ export class ExpensesComponent implements OnInit {
     const monthIndex = this.meses.indexOf(this.selectedMonth);
     if (monthIndex > 0) {
       this.selectedMonth = this.meses[monthIndex - 1];
+      // Atualize as despesas exibidas quando o mês for alterado
+      this.filtrarDespesasPorMes();
     } else {
       this.selectedMonth = "Dezembro";
       this.selectedYear = (parseInt(this.selectedYear) - 1).toString();
@@ -97,11 +132,14 @@ export class ExpensesComponent implements OnInit {
     const monthIndex = this.meses.indexOf(this.selectedMonth);
     if (monthIndex < this.meses.length - 1) {
       this.selectedMonth = this.meses[monthIndex + 1];
+      // Atualize as despesas exibidas quando o mês for alterado
+      this.filtrarDespesasPorMes();
     } else {
       this.selectedMonth = "Janeiro";
       this.selectedYear = (parseInt(this.selectedYear) + 1).toString();
     }
   }
+
 
   exibirDataResumida() {
     if (this.selectedYear === new Date().getFullYear().toString()) {

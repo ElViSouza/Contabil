@@ -31,6 +31,7 @@ import { MatIconDefaultOptions, MatIconModule } from '@angular/material/icon';
 import {MatIconTestingModule} from '@angular/material/icon/testing';
 import { SummaryComponent } from './feature/components/summary/summary.component';
 import { CommonModule } from '@angular/common';
+import { DashInitiComponent } from './feature/components/dash-initi/dash-initi.component';
 
 // const MAT_ICON_DEFAULT_OPTIONS: InjectionToken<MatIconDefaultOptions>;
 @NgModule({
@@ -44,7 +45,8 @@ import { CommonModule } from '@angular/common';
     TopHeaderComponent,
     FooterHeaderComponent,
     ExpensesComponent,
-    SummaryComponent
+    SummaryComponent,
+    DashInitiComponent
   ],
   imports: [
     BrowserModule,

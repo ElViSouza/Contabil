@@ -28,7 +28,7 @@ export class FooterHeaderComponent implements OnInit {
     });
   }
   dashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/init']);
   }
   renda() {
     this.router.navigate(['/inicio']);

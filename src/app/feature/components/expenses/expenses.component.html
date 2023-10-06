@@ -12,7 +12,7 @@
   </div>
   <div class="income-form">
     <div class="Texto">
-      <span>Informe suas Despesas</span>
+      <span>Despesas</span>
     </div>
     <div class="input-group">
       <div>
@@ -31,5 +31,15 @@
     </div>
     <button mat-raised-button (click)="addNewProduct2()">Adicionar despesas</button>
   </div>
+  
+  <div *ngFor="let product of filtrarDespesasPorMes()">
+    <p>despesa :{{ product.category2 }}</p>
+    <p>Valor: {{ product.price2 }}</p>
+    <p>Categoria: {{ product.selectedCategory }}</p>
+    <!-- <p>Ano: {{ product.year }}</p> -->
+    <!-- <p>Mês: {{ product.month }}</p> -->
+  </div>
+
+  
 </section>
 <app-footer-header></app-footer-header>
