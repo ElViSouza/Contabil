@@ -1,103 +1,113 @@
+import { SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DateUtilsService } from 'src/app/shared/services/date-utils.service';
 import { FirebaseAuthService } from 'src/app/shared/services/firebase-auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 export interface ProductData {
-  category: string;
-  price: number;
+  category2: string;
+  price2: number;
+  selectedCategory: string;
+  year: string;
+  month: string; // Adicione esta propriedade
 }
+
+export interface ExpenseData {
+  category2: string;
+  price2: number;
+  selectedCategory: string;
+  year: string;
+  month: string;
+}
+
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.component.html',
   styleUrls: ['./expenses.component.scss'],
 })
 export class ExpensesComponent implements OnInit {
-  formGroup: FormGroup;
-  category: string = '';
-  productName: string = '';
-  price: number;
-  category2: string = '';
-  productName2: string = '';
-  price2: number = 0;
-  productAdded: boolean = true;
-  products: any[] = [];
+  category2: string;
+  price2: number;
   products2: any[] = [];
-  categories: any[] = [];
-  displayedColumns: string[] = [ 'category', 'price', 'actions'];
   categoriess: string[] = ['casa', 'saúde', 'educação'];
   selectedCategory: string = '';
-  resultado: any[] = [];
-
-
-
   productsArray: ProductData[] = [];
-  productsArray2: ProductData[] = [];
-  card = false;
+  selectedYear: string;
+  selectedMonth: string = "Janeiro";
+  meses: string[] = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
 
   constructor(
     private authService: FirebaseAuthService,
-    private formBuilder: FormBuilder) {}
+    private dateUtilsService: DateUtilsService) { }
 
   ngOnInit() {
     this.fetchProductsFromFirebase2();
-    this.formGroup = this.formBuilder.group({
-      category: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(0)]],
-      selectedCategory: ['', Validators.required]
-    });
+    this.selectedYear = new Date().getFullYear().toString();
+    const now = new Date();
+    this.selectedMonth = this.meses[now.getMonth()];
+    this.selectedYear = this.getYear();
   }
-  isFormValid(): boolean {
-    return !!this.category2 && this.price2 > 0 && !!this.selectedCategory;
+  // Adicione esta função à sua classe
+  filtrarDespesasPorMes() {
+    return this.productsArray.filter((product) => product.month === this.selectedMonth);
   }
-    
+
+  getYear(): string {
+    const currentDate = new Date();
+    return currentDate.getFullYear().toString();
+  }
 
   fetchProductsFromFirebase2() {
     this.authService.fetchProductsFromFirebase2().subscribe((products2) => {
+      console.log('dd', products2);
       this.products2 = products2;
-      console.log('aqui',products2);
-      
-
       this.productsArray = [];
 
-      for (const key in products2) {
-        if (products2.hasOwnProperty(key)) {
-          this.productsArray.push({
-            category: products2[key].key,
-            price: products2[key].price,
-          });
+      for (const year in products2) {
+        if (products2.hasOwnProperty(year)) {
+          for (const month in products2[year]) {
+            if (products2[year].hasOwnProperty(month)) {
+              for (const expenseKey in products2[year][month]) {
+                if (products2[year][month].hasOwnProperty(expenseKey)) {
+                  const expense: ProductData = {
+                    category2: expenseKey,
+                    price2: products2[year][month][expenseKey].price,
+                    selectedCategory: products2[year][month][expenseKey].selectedCategory,
+                    year: year,
+                    month: month
+                  };
+                  this.productsArray.push(expense);
+                }
+              }
+            }
+          }
         }
       }
     });
   }
+
+
   addNewProduct2() {
-    if (this.formGroup.valid) {
-      const { category, price, selectedCategory } = this.formGroup.value;
-      this.authService.addProductToDatabase2(
-        category,
-        price,
-        selectedCategory,
+    if (this.category2 && this.price2 > 0 && this.selectedMonth && this.selectedYear && this.selectedCategory) {
+      this.authService.addProductToDatabase2(this.selectedYear, this.selectedMonth, this.category2, this.price2, this.selectedCategory,
         (error) => {
           if (!error) {
             console.log('Produto adicionado com sucesso!');
-            // Limpar os campos após adicionar o produto
-            this.formGroup.reset();
-            this.card = false;
+            this.category2 = '';
+            this.price2 = 0;
           } else {
-            console.error(
-              'Erro ao adicionar produto ao banco de dados:',
-              error
-            );
+            console.error('Erro ao adicionar produto ao banco de dados:', error);
           }
         }
       );
     } else {
       console.error('Preencha todos os campos corretamente.');
     }
-    // this.fetchProductsFromFirebase();
   }
 
+
   deleteProduct2(category2: string) {
-    // Chame o método do serviço para excluir um produto
     this.authService.deleteProductFromDatabase2(category2, (error) => {
       if (error) {
         console.error('Erro ao excluir produto:', error);
@@ -106,10 +116,36 @@ export class ExpensesComponent implements OnInit {
       }
     });
   }
-  isObject(obj: any): boolean {
-    return typeof obj === 'object';
+  selecionarMesAnterior() {
+    const monthIndex = this.meses.indexOf(this.selectedMonth);
+    if (monthIndex > 0) {
+      this.selectedMonth = this.meses[monthIndex - 1];
+      // Atualize as despesas exibidas quando o mês for alterado
+      this.filtrarDespesasPorMes();
+    } else {
+      this.selectedMonth = "Dezembro";
+      this.selectedYear = (parseInt(this.selectedYear) - 1).toString();
+    }
   }
-  getObjectKeys(obj: any): string[] {
-    return Object.keys(obj);
+
+  selecionarProximoMes() {
+    const monthIndex = this.meses.indexOf(this.selectedMonth);
+    if (monthIndex < this.meses.length - 1) {
+      this.selectedMonth = this.meses[monthIndex + 1];
+      // Atualize as despesas exibidas quando o mês for alterado
+      this.filtrarDespesasPorMes();
+    } else {
+      this.selectedMonth = "Janeiro";
+      this.selectedYear = (parseInt(this.selectedYear) + 1).toString();
+    }
+  }
+
+
+  exibirDataResumida() {
+    if (this.selectedYear === new Date().getFullYear().toString()) {
+      return `${this.selectedMonth}`;
+    } else {
+      return `${this.selectedMonth.substr(0, 3)}. ${this.selectedYear}`;
+    }
   }
 }

@@ -8,6 +8,7 @@ import { DashComponent } from './feature/components/dash/dash.component';
 import { TopHeaderComponent } from './feature/components/headers/top-header/top-header.component';
 import { ExpensesComponent } from './feature/components/expenses/expenses.component';
 import { SummaryComponent } from './feature/components/summary/summary.component';
+import { DashInitiComponent } from './feature/components/dash-initi/dash-initi.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'top-header', component: TopHeaderComponent },
   { path: 'despesas', component: ExpensesComponent },
   { path: 'resumo', component: SummaryComponent },
+  { path: 'init', component: DashInitiComponent },
   { path: '**', redirectTo: '/login' }, // Rota para lidar com URLs inválidas  
 ];
 

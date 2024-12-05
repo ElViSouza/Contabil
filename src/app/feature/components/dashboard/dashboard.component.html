@@ -1,44 +1,12 @@
-
+<!-- 
 <div class="container-fluid top">
     <div class="row">
-
-        <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active">
-                            <i class="fas fa-user"></i>
-                            User Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="authService.SignOut()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <i class="fas fa-euro-sign"></i>
-                            <i class="fas fa-dollar-sign"></i>
-                            <i class="fas fa-coins"></i>
-                            <i class="fas fa-wallet"></i>
-                            <i class="fas fa-cash-register"></i>
-
-                            Log out
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="next()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            entrar
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav> -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="inner-adjust">
 
                 <div class="pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">User Profile</h1>
+                    <h2 class="text">Bem vindo</h2>
                 </div>
-                <!-- Show user data when logged in -->
                 <div class="row" *ngIf="authService.userData as user">
                     <div class="col-md-12">
                         <div class="media">
@@ -54,9 +22,73 @@
                         </div>
                     </div>
                     <h1>Hello: <strong>{{(user.displayName) ? user.displayName : getFirstNameFromEmail(user.email)}}</strong></h1>
-
                 </div>
             </div>
         </main>
     </div>
-</div>
+</div> -->
+<section>
+    <div class="Container">
+        <!-- <div class="Container_title">
+            <span class="text">Resumo</span>
+        </div> -->
+        <div class="Container_subtitle">
+            <span> Selecione o mês</span>
+        </div>
+        <div class="Group">
+            <div class="Group_aling">
+                <span (click)="selecionarMesAnterior()" class="material-icons">
+                    arrow_back_ios
+                </span>
+                <span class="text">{{ exibirDataResumida() }}</span>
+                <span (click)="selecionarProximoMes()" class="material-icons">
+                    arrow_forward_ios
+                </span>
+            </div>
+        </div>
+
+        <div class="Container_divid">
+            <span>Despesas</span>
+            <!-- <div>
+              <select [(ngModel)]="categoriaSelecionada" (change)="calcularTotal()">
+                <option disabled selected>Buscar categoria</option>
+                <option *ngFor="let categoria of getCategoriasUnicas()" [value]="categoria">{{ categoria }}</option>
+              </select>
+            </div> -->
+            <div class="Container_divid_inputs">
+                <label *ngFor="let categoria of getCategoriasUnicas()">
+                    <input type="radio" name="categoria" [(ngModel)]="categoriaSelecionada" [value]="categoria"
+                        (change)="calcularTotal()" />
+                    {{ categoria }}
+                </label>
+            </div>
+            <div class="Container_divid_card"
+                *ngFor="let product of filtrarPorCategoria(categoriaSelecionada, selectedMonth)">
+                <div class="Container_divid_card_aling">
+                    <div>
+                        <div class="Container_divid_card_aling_text">
+                            <span>{{ product.category2 }}</span>
+                        </div>
+                        <div class="Container_divid_card_aling_text2">
+                            <span>{{ product.selectedCategory }}</span>
+                        </div>
+                    </div>
+                    <div class="Container_divid_card_aling_money">
+                        <span>{{ product.price2 | currency: 'BRL' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="total > 0">
+                <span>Total: {{ total | currency: 'BRL' }}</span>
+            </div>
+            <!-- Mova esta linha para fora do loop -->
+
+        </div>
+
+    </div>
+    <!-- <canvas id="myPieChart"></canvas> -->
+
+
+</section>
+
+<app-footer-header></app-footer-header>

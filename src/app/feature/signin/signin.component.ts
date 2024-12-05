@@ -22,7 +22,7 @@ export class SigninComponent {
   onSubmit() {
     this.authService.signIn(this.email, this.password)
       .then(user => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/init']);
         // Login bem-sucedido, você pode redirecionar ou executar outras ações aqui
         this.toastr.success('Usuário autenticado:');
       })

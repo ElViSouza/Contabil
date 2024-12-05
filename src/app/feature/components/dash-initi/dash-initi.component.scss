@@ -1,0 +1,41 @@
+.Container {
+  padding: 1rem;
+
+  &_title {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  &_value {
+    display: flex;
+    justify-content: space-evenly;
+    &_dest {
+      margin-top: 1.2rem;
+      padding: 0.5rem;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      i {
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+      }
+
+      &_cash {
+        padding: 0.8rem 0 0 0.9rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+      }
+      &_link {
+        text-decoration: underline;
+        color: blue;
+        padding-left: 1rem;
+        font-size: 14px;
+      }
+      &_link:hover {
+        color: red;
+      }
+    }
+  }
+}
